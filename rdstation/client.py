@@ -35,6 +35,9 @@ class Client(object):
     def get_account_info(self):
         return self.get("marketing/account_info")
 
+    def create_deal(self, data):
+        return self.post("platform/events", data=json.dumps(data))
+
     def get(self, endpoint, **kwargs):
         response = self.request("GET", endpoint, **kwargs)
         return self.parse(response)
