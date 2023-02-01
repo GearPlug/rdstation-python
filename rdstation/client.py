@@ -36,7 +36,9 @@ class Client(object):
         return self.get("marketing/account_info")
 
     def create_deal(self, data):
-        return self.post("platform/events", data=json.dumps(data))
+        item = {"event_type": "CONVERSION", "event_family": "CDP", "payload": data}
+
+        return self.post("platform/events", data=json.dumps(item))
 
     def get(self, endpoint, **kwargs):
         response = self.request("GET", endpoint, **kwargs)
