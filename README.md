@@ -13,15 +13,15 @@ from rdstation.client import Client
 client = Client(client_id, client_secret)
 ```
 To obtain and set an access token, follow this instructions:
-1. Get authorization URL:
+1. **Get authorization URL**
 ```
 url = client.authorization_url(redirect_uri)
 ```
-2. Get access token using code
+2. **Get access token using code**
 ```
 response = client.get_access_token(code)
 ```
-3. Set access token
+3. **Set access token**
 ```
 client.set_token(access_token)
 ```
@@ -35,7 +35,7 @@ Check more information about RD Station Oauth: https://legacydevelopers.rdstatio
 ```
 info = client.get_account_info()
 ```
-### LEADS
+### Leads
 #### Create Lead
 ```
 lead_example = {
@@ -65,6 +65,19 @@ lead_example = {
     "available_for_mailing": True,
     "legal_bases": [{"category": "communications", "type": "consent", "status": "granted"}],
 }
-created = client.create_deal(lead_example)
+created = client.create_lead(lead_example)
 ```
-
+### Webhooks
+#### List webhooks
+```
+webhooks = client.list_webhooks()
+```
+#### Create webhook
+```
+webhook = client.create_webhook(event_type, url, event_identifiers: list = None, include_relations: list =None)
+# event type options: "WEBHOOK.CONVERTED", "WEBHOOK.MARKED_OPPORTUNITY"
+```
+#### Delete webhook
+```
+client.delete_webhook(uuid)
+```

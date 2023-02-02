@@ -35,10 +35,26 @@ class Client(object):
     def get_account_info(self):
         return self.get("marketing/account_info")
 
-    def create_deal(self, data):
+    def create_lead(self, data):
         item = {"event_type": "CONVERSION", "event_family": "CDP", "payload": data}
-
         return self.post("platform/events", data=json.dumps(item))
+
+    def list_webhooks(self):
+        return self.get("integrations/webhooks")
+
+    def create_webhook(self, event_type, url, event_identifiers:list=None, include_relations:list=None):
+        data = {
+            "entity_type": "CONTACT",
+            "event_type": event_type,
+            "event_identifiers": event_identifiers,
+            "url": url,
+            "http_method": "POST",
+            "include_relations": include_relations
+        }
+        return self.post("integrations/webhooks", data=json.dumps(data))
+
+    def delete_webhook(self, uuid):
+        return self.delete(f"integrations/webhooks/{uuid}")
 
     def get(self, endpoint, **kwargs):
         response = self.request("GET", endpoint, **kwargs)
