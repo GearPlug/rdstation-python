@@ -65,8 +65,11 @@ lead_example = {
     "available_for_mailing": True,
     "legal_bases": [{"category": "communications", "type": "consent", "status": "granted"}],
 }
-created = client.create_lead(lead_example)
+event_type = "CONVERSION"
+created = client.create_lead(event_type, lead_example)
+# event_type options are: CONVERSION, OPPORTUNITY, SALE, OPPORTUNITY_LOST, ORDER_PLACED, ORDER_PLACED_ITEM, CART_ABANDONED, CART_ABANDONED_ITEM, CHAT_STARTED, CHAT_FINISHED, CALL_FINISHED, MEDIA_PLAYBACK_STARTED, MEDIA_PLAYBACK_STOPPED
 ```
+Depending on event type, sent data should be different, check https://legacydevelopers.rdstation.com/es/reference/events for more info.
 ### Webhooks
 #### List webhooks
 ```

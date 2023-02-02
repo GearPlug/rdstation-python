@@ -35,8 +35,8 @@ class Client(object):
     def get_account_info(self):
         return self.get("marketing/account_info")
 
-    def create_lead(self, data):
-        item = {"event_type": "CONVERSION", "event_family": "CDP", "payload": data}
+    def create_lead(self, event_type, data):
+        item = {"event_type": event_type, "event_family": "CDP", "payload": data}
         return self.post("platform/events", data=json.dumps(item))
 
     def list_webhooks(self):
