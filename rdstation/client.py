@@ -42,7 +42,7 @@ class Client(object):
     def list_webhooks(self):
         return self.get("integrations/webhooks")
 
-    def create_webhook(self, event_type, url, event_identifiers:list=None, include_relations:list=None):
+    def create_webhook(self, event_type, url, event_identifiers:list=[], include_relations:list=[]):
         data = {
             "entity_type": "CONTACT",
             "event_type": event_type,
