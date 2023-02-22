@@ -35,6 +35,9 @@ class Client(object):
     def get_account_info(self):
         return self.get("marketing/account_info")
 
+    def get_contact_by_email(self, email):
+        return self.get(f"platform/contacts/email:{email}")
+
     def create_lead(self, event_type, data):
         item = {"event_type": event_type, "event_family": "CDP", "payload": data}
         return self.post("platform/events", data=json.dumps(item))
