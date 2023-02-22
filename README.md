@@ -1,8 +1,8 @@
-![](https://img.shields.io/badge/version-0.1.0-success) ![](https://img.shields.io/badge/code-Python-4B8BBE?logo=python&logoColor=white)
+![](https://img.shields.io/badge/version-0.1.1-success) ![](https://img.shields.io/badge/Python-3.8%20|%203.9%20|%203.10%20|%203.11-4B8BBE?logo=python&logoColor=white)
 # rdstation-python
 
 *rdstation-python* is an API wrapper for RD Station, written in Python.  
-This library uses Oauth2 for authentication.
+This library uses Oauth2 for authentication and webhook notifications.
 ## Installing
 ```
 pip install rdstation-python
@@ -34,6 +34,10 @@ Check more information about RD Station Oauth: https://legacydevelopers.rdstatio
 #### Get account info
 ```
 info = client.get_account_info()
+```
+#### Get contact by email
+```
+contact = client.get_contact_by_email(email)
 ```
 ### Leads
 #### Create Lead

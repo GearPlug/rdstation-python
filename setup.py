@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name="rdstation-python",
-    version="0.1.0",
+    version="0.1.1",
     description="API wrapper for RD Station written in Python",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
