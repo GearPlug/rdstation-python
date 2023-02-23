@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/version-0.1.1-success) ![](https://img.shields.io/badge/Python-3.8%20|%203.9%20|%203.10%20|%203.11-4B8BBE?logo=python&logoColor=white)
+![](https://img.shields.io/badge/version-0.1.2-success) ![](https://img.shields.io/badge/Python-3.8%20|%203.9%20|%203.10%20|%203.11-4B8BBE?logo=python&logoColor=white)
 # rdstation-python
 
 *rdstation-python* is an API wrapper for RD Station, written in Python.  
@@ -38,6 +38,10 @@ info = client.get_account_info()
 #### Get contact by email
 ```
 contact = client.get_contact_by_email(email)
+```
+#### Get contact fields
+```
+fields = client.get_contact_fields()
 ```
 ### Leads
 #### Create Lead
