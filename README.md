@@ -2,7 +2,6 @@
 ![](https://img.shields.io/badge/version-0.2.1-success) ![](https://img.shields.io/badge/Python-3.8%20|%203.9%20|%203.10%20|%203.11-4B8BBE?logo=python&logoColor=white)  
 
 *rdstation-python* is an API wrapper for RD Station, written in Python.
-Productos
 1. [RD Station Marketing](#1-rd-station-marketing) (This product uses Oauth2 for authentication and webhook notifications). 
 2. [RD Station CRM](#2-rd-station-crm)
 
@@ -98,10 +97,16 @@ client.delete_webhook(uuid)
 ```
 
 ## 2. RD Station CRM
+Check this site for more information: https://developers.rdstation.com/reference/instru%C3%A7%C3%B5es-e-requisitos
 ### Usage
 ```python
 from rdstation.crm import CRMClient
 client = CRMClient(token)
+```
+### Users
+#### List users
+```python
+users = client.list_users()
 ```
 ### Contacts
 #### List contacts
@@ -139,6 +144,56 @@ companies = client.list_companies(page=None, limit=None, order=None, direction=N
 # order: field to be sorted. Default is 'name'
 # direction: 'asc' or 'desc', defaulti is 'asc'
 # query: name of company to be searched"
+```
+### Opportunities
+#### List opportunities
+```python
+opportunities = client.list_opportunities(
+    page=None,
+    limit=None,
+    order=None,
+    direction=None,
+    name=None,
+    win=None,
+    user_id=None,
+    closed_at=None,
+    closed_at_period=None,
+    created_at_period=None,
+    prediction_date_period=None,
+    start_date=None,
+    end_date=None,
+    campaign_id=None,
+    deal_stage_id=None,
+    deal_pipeline_id=None,
+    organization=None,
+    hold=None,
+)
+```
+#### Create opportunity
+```python
+#TODO: actualizar esto:
+example = {
+    "name": "juan python 3",
+} 
+custom_fields_example = [
+    {
+        "custom_field_id": "6414c0fc43ba490012f96c64",
+        "value": "a text custom field"
+    }
+]
+contact = client.create_contact(example, custom_fields_example)
+```
+#### List deal stages
+```python
+stages = client.list_deal_stages(page=None, limit=None)
+```
+#### List deal pipelines
+```python
+stages = client.list_deal_pipelines()
+```
+#### List deal sources
+```python
+stages = client.list_deal_sources()
 ```
 ### Custom fields
 ```python

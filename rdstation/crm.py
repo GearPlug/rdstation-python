@@ -14,6 +14,9 @@ class CRMClient(object):
     def __init__(self, token):
         self.TOKEN = token
 
+    def list_users(self):
+        return self.get("users")
+
     def list_contacts(self, page=None, limit=None, order=None, direction=None, email=None, query=None):
         """
         limit: default is 20. Max is 200. \n
@@ -59,6 +62,43 @@ class CRMClient(object):
         params = {}
         return self.get("organizations", params=params)
 
+    def list_opportunities(
+        self,
+        page=None,
+        limit=None,
+        order=None,
+        direction=None,
+        name=None,
+        win=None,
+        user_id=None,
+        closed_at=None,
+        closed_at_period=None,
+        created_at_period=None,
+        prediction_date_period=None,
+        start_date=None,
+        end_date=None,
+        campaign_id=None,
+        deal_stage_id=None,
+        deal_pipeline_id=None,
+        organization=None,
+        hold=None,
+    ):
+        params = {}
+        args = locals()
+        for arg in args:
+            if args[arg] is not None and arg != "self" and arg != "params":
+                params.update({f"{arg}": args[arg]})
+        return self.get("deals", params=params)
+
+    def create_opportunity(self, deal_data, custom_data=None):
+        data = {"deal": deal_data}
+        if custom_data is not None:
+            data["deal"]["deal_custom_fields"] = custom_data
+        #TODO: Corregir aca
+        data["organization"] = {"_id": "6414cc9895c34b000c0fb2aa"}
+        data["deal_source"] = {"_id": "64148f7bff9080001bdca33b"}
+        return self.post("deals", data=json.dumps(data))
+
     def list_custom_fields(self, option=None):
         """
         option: "contact", "deal", "organization"
@@ -67,6 +107,20 @@ class CRMClient(object):
         if option is not None:
             params.update({"for": option})
         return self.get("custom_fields", params=params)
+
+    def list_deal_stages(self, page=None, limit=None):
+        params = {}
+        if page is not None:
+            params.update(page=page)
+        if limit is not None:
+            params.update(limit=limit)
+        return self.get("deal_stages", params=params)
+
+    def list_deal_pipelines(self):
+        return self.get("deal_pipelines")
+
+    def list_deal_sources(self):
+        return self.get("deal_sources")
 
     def get(self, endpoint, **kwargs):
         response = self.request("GET", endpoint, **kwargs)
