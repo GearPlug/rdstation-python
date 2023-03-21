@@ -1,6 +1,6 @@
 import json
-
 from urllib.parse import urlencode
+
 import requests
 
 from rdstation.exceptions import UnauthorizedError, WrongFormatInputError, ContactsLimitExceededError

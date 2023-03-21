@@ -1,8 +1,8 @@
 # rdstation-python
-![](https://img.shields.io/badge/version-0.2.1-success) ![](https://img.shields.io/badge/Python-3.8%20|%203.9%20|%203.10%20|%203.11-4B8BBE?logo=python&logoColor=white)  
+![](https://img.shields.io/badge/version-0.2.0-success) ![](https://img.shields.io/badge/Python-3.8%20|%203.9%20|%203.10%20|%203.11-4B8BBE?logo=python&logoColor=white)  
 
 *rdstation-python* is an API wrapper for RD Station, written in Python.
-1. [RD Station Marketing](#1-rd-station-marketing) (This product uses Oauth2 for authentication and webhook notifications). 
+1. [RD Station Marketing](#1-rd-station-marketing) (This product uses Oauth2 for authentication and uses webhook notifications). 
 2. [RD Station CRM](#2-rd-station-crm)
 
 ## Installing
@@ -104,12 +104,12 @@ from rdstation.crm import CRMClient
 client = CRMClient(token)
 ```
 ### Users
-#### List users
+#### - List users
 ```python
 users = client.list_users()
 ```
 ### Contacts
-#### List contacts
+#### - List contacts
 ```python
 contacts = client.list_contacts(page=None, limit=None, order=None, direction=None, email=None, query=None)
 # limit: default is 20. Max is 200.
@@ -118,7 +118,7 @@ contacts = client.list_contacts(page=None, limit=None, order=None, direction=Non
 # email: filter by email
 # query: name of contact to be searched"
 ```
-#### Create Contact
+#### - Create Contact
 ```python
 example = {
     "name": "juan python 3",
@@ -137,7 +137,7 @@ custom_fields_example = [
 contact = client.create_contact(example, custom_fields_example)
 ```
 ### Companies
-#### List companies
+#### - List companies
 ```python
 companies = client.list_companies(page=None, limit=None, order=None, direction=None, user_id=None, query=None)
 # limit: default is 20. Max is 200.
@@ -146,56 +146,43 @@ companies = client.list_companies(page=None, limit=None, order=None, direction=N
 # query: name of company to be searched"
 ```
 ### Opportunities
-#### List opportunities
+#### - List opportunities
 ```python
-opportunities = client.list_opportunities(
-    page=None,
-    limit=None,
-    order=None,
-    direction=None,
-    name=None,
-    win=None,
-    user_id=None,
-    closed_at=None,
-    closed_at_period=None,
-    created_at_period=None,
-    prediction_date_period=None,
-    start_date=None,
-    end_date=None,
-    campaign_id=None,
-    deal_stage_id=None,
-    deal_pipeline_id=None,
-    organization=None,
-    hold=None,
-)
+opportunities = client.list_opportunities(limit=1, page=1, direction="desc")
 ```
-#### Create opportunity
+#### - Create opportunity
 ```python
-#TODO: actualizar esto:
-example = {
-    "name": "juan python 3",
-} 
 custom_fields_example = [
     {
         "custom_field_id": "6414c0fc43ba490012f96c64",
         "value": "a text custom field"
     }
 ]
-contact = client.create_contact(example, custom_fields_example)
+oppor = client.create_opportunity(
+    "opportunity name 2023",
+    deal_stage_id="64148f7bff9080001bdca349",
+    organization_id="6414cc9895c34b000c0fb2aa",
+    deal_source_id="64148f7bff9080001bdca33b",
+    rating=4,
+    prediction_date="2023-11-11",
+    custom_data=custom_fields_example,
+)
 ```
-#### List deal stages
+Check this site for more information about creating opportunities: https://developers.rdstation.com/reference/oportunidades
+#### - List deal stages
 ```python
 stages = client.list_deal_stages(page=None, limit=None)
 ```
-#### List deal pipelines
+#### - List deal pipelines
 ```python
 stages = client.list_deal_pipelines()
 ```
-#### List deal sources
+#### - List deal sources
 ```python
 stages = client.list_deal_sources()
 ```
 ### Custom fields
+#### - List custom fields
 ```python
 fields = client.list_custom_fields(option=None)
 # option: "contact", "deal", "organization"

@@ -1,6 +1,5 @@
 import json
 
-from urllib.parse import urlencode
 import requests
 
 from rdstation.exceptions import UnauthorizedError, WrongFormatInputError, ContactsLimitExceededError
@@ -83,6 +82,10 @@ class CRMClient(object):
         organization=None,
         hold=None,
     ):
+        """
+        Check this site if you need more information about how these filters work: \n
+        https://developers.rdstation.com/reference/listar-2
+        """
         params = {}
         args = locals()
         for arg in args:
@@ -90,13 +93,42 @@ class CRMClient(object):
                 params.update({f"{arg}": args[arg]})
         return self.get("deals", params=params)
 
-    def create_opportunity(self, deal_data, custom_data=None):
-        data = {"deal": deal_data}
-        if custom_data is not None:
-            data["deal"]["deal_custom_fields"] = custom_data
-        #TODO: Corregir aca
-        data["organization"] = {"_id": "6414cc9895c34b000c0fb2aa"}
-        data["deal_source"] = {"_id": "64148f7bff9080001bdca33b"}
+    def create_opportunity(
+        self,
+        name,
+        deal_stage_id=None,
+        organization_id=None,
+        deal_source_id=None,
+        campaign_id=None,
+        user_id=None,
+        hold: bool = None,
+        rating=None,
+        win: bool = None,
+        prediction_date=None,
+        custom_data=None,
+    ):
+        """
+        Custom data must be an array of dicts with the following structure: \n
+        custom_data = [
+            {
+                "custom_field_id": "6414c0fc43ba490012f96c64",
+                "value": "A text custom field"
+            }
+        ]
+        Check this site for more information: https://developers.rdstation.com/reference/oportunidades
+        """
+        data = {"deal": {"name": name}}
+        args = locals()
+        first_layer_args = ["organization_id", "deal_source_id", "campaign_id"]
+        ignore_args = ["self", "data", "name"]
+        for arg in args:
+            if arg not in ignore_args and args[arg] is not None:
+                if arg in first_layer_args:
+                    data[arg.replace("_id","")] = {"_id": args[arg]}
+                elif arg == "custom_data":
+                    data["deal"]["deal_custom_fields"] = custom_data
+                else:
+                    data[arg] = args[arg]
         return self.post("deals", data=json.dumps(data))
 
     def list_custom_fields(self, option=None):
