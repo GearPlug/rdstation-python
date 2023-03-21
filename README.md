@@ -110,21 +110,13 @@ contacts = client.list_contacts(page=None, limit=None, order=None, direction=Non
 ```
 #### - Create Contact
 ```python
-example = {
-    "name": "juan python 3",
-    "name": "contact name 3",
-    "title": "3 title",
-    "birthday": {"day": 11, "month": 9, "year": 1989},
-    "emails": [{"email": "fulano@email.com.br"}],
-    "phones": [{"phone": "71304556"}]
-} 
-custom_fields_example = [
+custom_fields = [
     {
         "custom_field_id": "6414c0fc43ba490012f96c64",
         "value": "a text custom field"
     }
 ]
-contact = client.create_contact(example, custom_fields_example)
+contact = client.create_contact("contact X", "Mr", "1991-01-04", "test@test.com", custom_data=custom_fields)
 ```
 ### Companies
 #### - List companies
