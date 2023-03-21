@@ -158,7 +158,7 @@ class CRMClient(object):
                 elif arg == "custom_data":
                     data["deal"]["deal_custom_fields"] = custom_data
                 else:
-                    data[arg] = args[arg]
+                    data["deal"][arg] = args[arg]
         return self.post("deals", data=json.dumps(data))
 
     def list_custom_fields(self, option=None):
