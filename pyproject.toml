@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "rdstation-python"
 version = "0.2.1"
-description = "API wrapper for Alegra written in Python"
+description = "API wrapper for RD Station written in Python"
 authors = ["Juan Carlos Rios <juankrios15@gmail.com>"]
 license = "MIT"
 readme = "README.md"
