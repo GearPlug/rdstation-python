@@ -65,7 +65,7 @@ class CRMClient(object):
             item["contact"]["birthday"] = {"day": day, "month": month, "year": year}
         if email is not None:
             item["contact"]["emails"] = [{"email": email}]
-        if email is not None:
+        if phone is not None:
             item["contact"]["phones"] = [{"phone": phone}]
         if organization_id is not None:
             item["contact"]["organization_id"] = organization_id
@@ -74,6 +74,41 @@ class CRMClient(object):
         if custom_data is not None:
             item["contact"]["contact_custom_fields"] = custom_data
         return self.post("contacts", data=json.dumps(item))
+
+    def update_contact(
+        self,
+        contact_id: int,
+        name = None,
+        title = None,
+        birthday = None,
+        email = None,
+        phone = None,
+        organization_id = None,
+        deal_ids: list = None,
+        custom_data = None,
+    ):
+        item = {"contact": {}}
+        if name is not None:
+            item["contact"]["name"] = name
+        if title is not None:
+            item["contact"]["title"] = title
+        if birthday is not None:
+            try:
+                year, month, day = birthday.split("-")
+            except ValueError:
+                return "Error: Birthday format must be 'YYYY-MM-DD'"
+            item["contact"]["birthday"] = {"day": day, "month": month, "year": year}
+        if email is not None:
+            item["contact"]["emails"] = [{"email": email}]
+        if phone is not None:
+            item["contact"]["phones"] = [{"phone": phone}]
+        if organization_id is not None:
+            item["contact"]["organization_id"] = organization_id
+        if deal_ids is not None:
+            item["contact"]["deal_ids"] = deal_ids
+        if custom_data is not None:
+            item["contact"]["contact_custom_fields"] = custom_data
+        return self.put(f"contacts/{contact_id}", data=json.dumps(item))
 
     def list_companies(self, page=None, limit=None, order=None, direction=None, user_id=None, query=None):
         if page is not None:

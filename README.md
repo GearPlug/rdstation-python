@@ -118,6 +118,16 @@ custom_fields = [
 ]
 contact = client.create_contact("contact X", "Mr", "1991-01-04", "test@test.com", custom_data=custom_fields)
 ```
+#### - Update Contact
+```python
+custom_fields = [
+    {
+        "custom_field_id": "6414c0fc43ba490012f96c64",
+        "value": "a text custom field"
+    }
+]
+contact = client.update_contact("CONTACT_ID", "contact X", "Mr", "1991-01-04", custom_data=custom_fields)
+```
 ### Companies
 #### - List companies
 ```python
