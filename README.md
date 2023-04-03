@@ -1,5 +1,5 @@
 # rdstation-python
-![](https://img.shields.io/badge/version-0.2.0-success) ![](https://img.shields.io/badge/Python-3.8%20|%203.9%20|%203.10%20|%203.11-4B8BBE?logo=python&logoColor=white)  
+![](https://img.shields.io/badge/version-0.2.1-success) ![](https://img.shields.io/badge/Python-3.8%20|%203.9%20|%203.10%20|%203.11-4B8BBE?logo=python&logoColor=white)  
 
 *rdstation-python* is an API wrapper for RD Station, written in Python.
 1. [RD Station Marketing](#1-rd-station-marketing) (This product uses Oauth2 for authentication and uses webhook notifications). 
